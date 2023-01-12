@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+  mongodb:
+    image: mongo
+    container_name: mongo-container
+    networks:
+      - compose-bridge
+
+  books: 
+    image: mongoclient/mongoclient
+    container_name: mongoclient-container
+    networks:
+      - compose-bridge
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+
+networks:
+  compose-bridge:
+    driver: bridge
